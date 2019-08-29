@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="x-ua-compatible" content="ie=edge" >
+        <title>Clock</title>
+        <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+        <style>
+            body{
+                min-height:100vh;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                background-color:black;
+            }
+            #clock{
+                font-size:5rem;
+                text-shadow:0.15rem 0.15rem 0.15rem white;
+                color:rgb(27, 252, 27);
+                font-family: 'Orbitron', sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="clock"></div>
+    </body>
+    <script>
+        function showtime(){
+            let time = new Date();
+            let hrs=time.getHours();
+            let min=time.getMinutes();
+            let sec=time.getSeconds();
+            let ampm=tellampm(hrs);
+            hrs = modifyhrs(hrs);
+            hrs=addzero(hrs);
+            min=addzero(min);
+            sec=addzero(sec);
+            document.getElementById('clock').innerHTML=`${hrs} : ${min} : ${sec} ${ampm}`;
+        }
+        function tellampm(hrs){
+            let word="AM";
+            if(hrs>=12){
+                word="PM";
+            }
+            return word;
+        }
+        function modifyhrs(hrs){
+            if(hrs>12){
+                hrs=hrs-12;
+            }
+            return hrs;
+        }
+        function addzero(content){
+            if(content<10){
+                content="0"+content;
+            }
+            return content;
+        }
+        showtime();
+        setInterval(showtime,1000);
+    </script>
+</html>
